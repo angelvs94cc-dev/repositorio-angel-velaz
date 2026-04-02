@@ -1,0 +1,33 @@
+.movie-row {
+    padding: 20px 4%;
+    margin-top: -80px; 
+    position: relative;
+    z-index: 10;
+
+    &__title {
+        font-size: 1.5rem;
+        color: #e5e5e5;
+        margin-bottom: 15px;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 10px;
+    }
+}
+
+.movie-card {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    img {
+        width: 100%;
+        border-radius: 4px;
+        display: block;
+    }
+
+    &:hover {
+        transform: scale(1.08); 
+    }
+}

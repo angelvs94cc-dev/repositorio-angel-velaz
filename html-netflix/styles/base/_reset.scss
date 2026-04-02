@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #141414; 
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white; 
+}
+
+.footer {
+    padding: 50px 4%;
+    color: #808080;
+    font-size: 0.8rem;
+    text-align: center;
+
+    &__links {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        a { color: #808080; font-size: 0.75rem; }
+    }
+}

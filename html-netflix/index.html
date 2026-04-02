@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Proyecto Final</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar__logo">
+            <img src="assets/images/logo-netflix.webp" alt="Netflix Logo">
+        </div>
+        <nav class="navbar__menu">
+            <a href="#">Inicio</a>
+            <a href="#">Series</a>
+            <a href="#">Películas</a>
+            <a href="#">Novedades</a>
+        </nav>
+        <div class="navbar__actions">
+            <button type="button" class="btn-login">Iniciar sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero__content fade-in">
+                <h1 class="hero__title">Stranger Things</h1>
+                <p class="hero__description">
+                    Cuando un niño desaparece, sus amigos, su familia y la policía se ven envueltos en una serie de eventos misteriosos al tratar de encontrarlo.
+                </p>
+                <div class="hero__buttons">
+                    <button type="button" class="btn-play">▶ Reproducir</button>
+                    <button type="button" class="btn-info">ⓘ Más información</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="movie-row fade-in">
+            <h2 class="movie-row__title">Tendencias ahora</h2>
+            <div class="movie-row__container">
+                <article class="movie-card">
+                    <img src="assets/images/peli1.jpg" alt="Peli 1" loading="lazy">
+                </article>
+                <article class="movie-card">
+                    <img src="assets/images/peli2.avif" alt="Peli 2" loading="lazy">
+                </article>
+                <article class="movie-card">
+                    <img src="assets/images/peli3.jpg" alt="Peli 3" loading="lazy">
+                </article>
+                <article class="movie-card">
+                    <img src="assets/images/peli4.webp" alt="Peli 4" loading="lazy">
+                </article>
+                <article class="movie-card">
+                    <img src="assets/images/peli5.jpg" alt="Peli 5" loading="lazy">
+                </article>
+                <article class="movie-card">
+                    <img src="assets/images/peli6.webp" alt="Peli 6" loading="lazy">
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Clon de Netflix - Proyecto para Mario</p>
+        <div class="footer__links">
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Centro de ayuda</a>
+            <a href="#">Términos de uso</a>
+            <a href="#">Privacidad</a>
+        </div>
+    </footer>
+
+</body>
+</html>
