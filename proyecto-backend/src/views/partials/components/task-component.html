@@ -1,0 +1,9 @@
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>
+        <a href="/tasks/<%= task._id %>" class="text-decoration-none">#<%= task._id %></a> 
+        - <%= task.title %>
+    </span>
+    <span class="badge <%= task.done ? 'bg-success' : 'bg-secondary' %>">
+        <%= task.done ? 'Hecho' : 'Pendiente' %>
+    </span>
+</li>

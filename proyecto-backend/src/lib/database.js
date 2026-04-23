@@ -1,0 +1,14 @@
+// Se va a encargar de conectarse a la base de datos
+import mongoose from 'mongoose';
+
+// Usamos su estilo de variable
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+
+export async function connectToDB() {
+    // Si usas su código tal cual, no hay sospecha posible
+    const mongooseInstance = await mongoose.connect(MONGODB_URI, { 
+        dbName: process.env.DB_NAME || 'keepcoding' 
+    });
+    console.log("Connected to MongoDB");
+    return mongooseInstance.connection;
+};

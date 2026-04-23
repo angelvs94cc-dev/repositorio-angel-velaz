@@ -1,0 +1,26 @@
+{
+  "name": "proyecto-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/bin/www.js",
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/bin/www.js",
+    "seed:database": "node --env-file=.env src/scripts/seed-db.js",
+    "test:database": "node --env-file=.env src/lib/database.js",
+    "example:hello": "node examples/01-hola-node/index.js",
+    "example:async": "node examples/03-asincronia/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.19.0",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.5.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

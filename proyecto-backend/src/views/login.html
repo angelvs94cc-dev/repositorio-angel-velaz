@@ -1,0 +1,50 @@
+<%- include('partials/page-start.html') %>
+
+<div class="container mt-5">
+    <h1>
+        <%= title %>
+    </h1>
+
+    <div class="card shadow-sm" style="max-width: 500px; margin: auto;">
+        <div class="card-body">
+            <form method="POST">
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        class="form-control" 
+                        id="email" 
+                        placeholder="email@example.org" 
+                        value="<%= values.email ?? '' %>"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        class="form-control" 
+                        id="password"
+                        required
+                    >
+                </div>
+
+                <% if (locals.errorMessage) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= errorMessage %>
+                    </div>
+                <% } %>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/page-end.html') %>
