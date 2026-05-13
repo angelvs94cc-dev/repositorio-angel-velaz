@@ -1,0 +1,422 @@
+:root {
+  --wallapop-green: #13C1AC;
+  --wallapop-green-dark: #0f9d8c;
+  --bg-wallapop: #f7f7f7;
+  --white: #ffffff;
+  --text-main: #2d3132;
+  --error-red: #ff5b5b;
+  /* ... tus otras variables ... */
+  --border-color: #ddd;
+  --shadow-soft: 0 4px 10px rgba(0,0,0,0.05);
+  --radius-button: 25px;
+}
+
+body {
+  background-color: var(--bg-wallapop);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.notifications-container {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+}
+
+.notification {
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  min-width: 280px;
+  border: none;
+}
+
+.notification.success {
+  background-color: var(--wallapop-green);
+}
+
+.notification.error {
+  background-color: var(--error-red);
+}
+
+/* Base para las tarjetas que vamos a crear luego */
+.ad-card {
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  overflow: hidden;
+}
+
+.ads-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.ad-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ad-card {
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  overflow: hidden;
+  transition: transform 0.2s;
+  height: 100%;
+}
+
+.ad-card:hover {
+  transform: translateY(-4px);
+}
+
+.ad-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.ad-info {
+  padding: 12px;
+}
+
+.ad-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.ad-name {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Para que no se rompa el diseño si el nombre es largo */
+}
+
+.create-ad-form {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  max-width: 500px;
+  margin: 0 auto 2rem auto;
+}
+
+.field-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.field-group input, 
+.field-group textarea {
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.field-group input:focus, 
+.field-group textarea:focus {
+  border-color: var(--wallapop-green);
+}
+
+.submit-button {
+  background-color: var(--wallapop-green);
+  color: white;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  border-radius: var(--radius-button);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background-color: var(--wallapop-green-dark);
+}
+
+.ad-detail {
+  display: flex;
+  gap: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  margin-top: 2rem;
+}
+
+.ad-detail-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.ad-detail-price {
+  font-size: 2.5rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.ad-detail-description {
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin: 1.5rem 0;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.edit-button {
+  background-color: #e6e6e6;
+  color: var(--text-main);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Ajustes del Header */
+.main-header {
+  background-color: var(--white);
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0.8rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.logo {
+  height: 32px;
+}
+
+.search-container {
+  flex-grow: 1;
+  margin: 0 2rem;
+  position: relative;
+}
+
+.search-container i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  font-size: 0.9rem;
+}
+
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-icon {
+  font-size: 1.4rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.upload-btn {
+  background-color: var(--wallapop-green);
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background-color: var(--wallapop-green-dark);
+}
+
+.section-title {
+  max-width: 1200px;
+  margin: 2rem auto 1rem;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  min-width: 140px; /* Le damos un espacio mínimo para que no desaparezca */
+}
+
+.logo-img {
+  height: 40px; 
+  width: auto;
+  display: block; /* Evita espacios vacíos debajo de la imagen */
+}
+
+/* Asegúrate de que el buscador no se coma todo el espacio */
+.search-container {
+  flex: 1; 
+  margin: 0 40px; /* Más espacio a los lados para que respire */
+  position: relative;
+}
+
+.session-container {
+  display: flex;
+  gap: 15px; /* Separa los enlaces */
+  align-items: center;
+  white-space: nowrap; /* Evita que el texto se parta como ese "trar" */
+}
+
+.session-container a {
+  text-decoration: none;
+  color: #13c1ac; /* El verde Wallapop */
+  font-weight: 600;
+}
+
+.ads-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.ad-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  background: white;
+}
+
+.ad-card:hover {
+  transform: translateY(-5px); /* Efecto pro al pasar el ratón */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-container i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.search-container input {
+  padding-left: 45px; /* Deja espacio para la lupa */
+}
+
+.delete-button, .edit-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.delete-button {
+  background-color: #ff5d5d;
+  color: white;
+}
+
+.edit-button {
+  background-color: #13c1ac;
+  color: white;
+  margin-right: 10px;
+}
+
+/* Contenedor de la derecha (donde sale Entrar/Registro o Subir Anuncio) */
+.session-container {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio real entre los enlaces */
+}
+
+/* Enlaces de Entrar y Registro */
+.nav-link {
+  text-decoration: none;
+  color: #13c1ac; /* Verde Wallapop */
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Botón de Subir Anuncio (que resalte) */
+.upload-btn {
+  background-color: #13c1ac;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Botón de Cerrar Sesión (discreto) */
+#logout-btn {
+  background: none;
+  border: 1px solid #ccc;
+  color: #666;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#logout-btn:hover {
+  background-color: #f5f5f5;
+}

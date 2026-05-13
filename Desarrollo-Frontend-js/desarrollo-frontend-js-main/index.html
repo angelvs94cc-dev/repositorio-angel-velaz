@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallapop - Compra y vende lo que quieras</title>
+  
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- 
+    CSS CORREGIDO 
+    Solo dejamos el que existe (notifications). 
+    Si luego creas el global, volveremos a añadir la otra línea.
+  -->
+  <link rel="stylesheet" href="./notifications/styles.css">
+</head>
+
+<body>
+
+  <header class="main-header">
+    <div class="header-content">
+      
+      <a href="./index.html" class="logo-link">
+        <img src="./assets/logo-wallapop.png.png" alt="Wallapop" class="logo-img">
+      </a>
+
+      <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search-input" placeholder="Buscar en todas las categorías">
+      </div>
+
+      <nav class="session-nav">
+        <i class="fa-regular fa-heart fav-icon"></i>
+        <div class="session-container">
+          <!-- El JS rellenará esto -->
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <div class="top-bar">
+      <h1 class="main-title">Anuncios recientes</h1>
+      <section class="create-ad-container">
+        <!-- El JS rellenará esto -->
+      </section>
+    </div>
+
+    <!-- Contenedores dinámicos -->
+    <section class="notifications-container"></section>
+    <section class="spinner-container"></section>
+
+    <section class="ads-container"></section>
+
+  </main>
+
+  <!-- Script principal como módulo -->
+  <script type="module" src="./index.js"></script>
+
+</body>
+</html>
