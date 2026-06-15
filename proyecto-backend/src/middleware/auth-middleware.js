@@ -1,5 +1,6 @@
 import session from 'express-session';
-import ConnectMongo from 'connect-mongo';
+// Comentamos el import de connect-mongo para que no intente buscar la librería de base de datos
+// import ConnectMongo from 'connect-mongo';
 
 const INACTIVITY_2_DAYS = 1000 * 60 * 60 * 24 * 2;
 
@@ -20,13 +21,12 @@ export const sessionMiddleware = session({
     resave: true,
     cookie: {
         maxAge: INACTIVITY_2_DAYS,
-    },
-    store: ConnectMongo.create({
-        mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017',
-    })
+    }
+    // ¡CAPADO! Quitamos el "store" de ConnectMongo para que Express use la memoria RAM local.
+    // De esta forma evitamos el error getaddrinfo ENOTFOUND por completo.
 });
 
 export function sessionInViews(req, res, next) {
     res.locals.session = req.session;
     next();
-};
+}

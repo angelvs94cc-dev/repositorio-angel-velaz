@@ -4,82 +4,71 @@ import express from 'express';
 import morgan from 'morgan';
 import ejs from 'ejs';
 
-// 1. Tus rutas (He mantenido tus nombres de archivo)
 import { pagesRouter } from './routes/pages-routes.js';
-import { utilitesRouter } from './routes/utilities-router.js';
-import { tasksRouter } from './routes/tasks-routes.js';
+import { utilitesRouter } from './routes/utilities-router.js'; 
+import { productsRouter } from './routes/products-routes.js'; 
 import { authRouter } from './routes/auth-router.js';
+import { productsPageController } from './controllers/products-controllers.js';
 
-// 2. Los middlewares de apoyo
 import { dataInViews } from './middleware/views-middleware.js';
-import { sessionMiddleware, sessionInViews, guard } from './middleware/auth-middleware.js';
+import { sessionMiddleware, sessionInViews } from './middleware/auth-middleware.js';
 
 const app = express();
 const appDir = dirname(fileURLToPath(import.meta.url));
 
-// --- CONFIGURACIÓN GLOBALES ---
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(join(appDir, '../public'))); // Aquí busca tu app.css
+app.use(express.json()); 
+app.use(express.static(join(appDir, '../public'))); 
 app.use(morgan('tiny'));
 app.use(dataInViews);
 
-// --- AUTH / SESIONES ---
 app.use(sessionMiddleware);
 app.use(sessionInViews);
 
-// --- MOTOR DE PLANTILLAS ---
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 app.set('views', join(appDir, 'views'));
 
 // --- RUTAS ---
+app.get('/', productsPageController); // El catálogo en la raíz
+app.use('/products', productsRouter); // El resto de rutas de productos
 app.use('/', pagesRouter);
-app.use('/', utilitesRouter);
+app.use('/', utilitesRouter); 
 app.use('/', authRouter);
-app.use('/tasks', guard, tasksRouter); // El guard protegerá tu Mongo después
 
-// --- EL "WRAPPER" DE HTML (Layout dinámico) ---
+// --- WRAPPER ---
 app.use((req, res, next) => {
     const renderHtml = res.locals.html; 
-    if (!renderHtml) {
-        next(); 
-        return;
-    }
+    if (!renderHtml) { next(); return; }
 
-    const title = res.locals.title || 'Express APP';
-    const pendingTasks = res.locals.pendingTasks || 0;
-    const content = res.locals.content || '<p>Cargando contenido...</p>';
+    const title = res.locals.title || 'Nodepop - Segunda Mano';
+    const content = res.locals.content || '<p>Cargando...</p>';
 
-    // Esta es la estructura que unifica todo el diseño
     res.send(`
         <!doctype html>
         <html lang="es">
             <head>
                 <meta charset="utf-8">
                 <link rel="stylesheet" href="/app.css">
-                <link rel="icon" href="/icon.webp">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
                 <title>${title}</title>
             </head>
-            <body>
-                <nav class="container my-3">
-                    <a href="/" class="me-3">Inicio</a>
-                    <a href="/tasks" class="me-3">Lista de tareas (${pendingTasks})</a>
-                    <a href="/health">Estado</a>
-                </nav>
-                <main class="container">
-                    ${content}
-                </main>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+            <body class="bg-light">
+                <header class="bg-dark py-3 mb-4 shadow-sm">
+                    <nav class="container d-flex justify-content-between">
+                        <a href="/" class="text-white text-decoration-none fs-4 fw-bold">🛒 Nodepop</a>
+                        <div>
+                            <a href="/" class="btn btn-outline-light btn-sm">Catálogo</a>
+                            <a href="/products/new" class="btn btn-primary btn-sm">Anunciar</a>
+                        </div>
+                    </nav>
+                </header>
+                <main class="container bg-white p-4 rounded shadow-sm">${content}</main>
             </body>
-        </html>    
+        </html>
     `);
 });
 
-// --- MANEJADOR 404 ---
-app.use((req, res) => {
-    res.status(404).send('Resource not found');
-});
+app.use((req, res) => res.status(404).send('Resource not found'));
 
 export default app;

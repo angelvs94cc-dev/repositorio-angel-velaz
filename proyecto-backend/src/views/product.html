@@ -1,0 +1,98 @@
+<%- include('partials/page-start.html') %>
+
+<h1><%= title %></h1>
+
+<% if (values._id) { %>
+    <span class="badge bg-secondary">Id del artículo: <%= values._id %></span>
+<% } %>
+
+<section class="card mt-3">
+    <div class="card-body">
+
+        <% if (locals.errorMessage) { %>
+            <div class="alert alert-warning"><%= errorMessage %></div>
+        <% } %>
+
+        <form method="POST" action="/products<%= values._id ? '/edit/' + values._id : '' %>">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre del Producto</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-control"
+                    placeholder="Ej: iPhone 15 Pro, Casco de moto..."
+                    value="<%= values.name ?? '' %>"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Precio (€)</label>
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    class="form-control"
+                    placeholder="Ej: 450"
+                    min="0"
+                    value="<%= values.price ?? '' %>"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-block">Tags (Selecciona uno o varios)</label>
+                <% const currentTags = values.tags || []; %>
+                
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="tags" id="tagWork" value="work" <%= currentTags.includes('work') ? 'checked' : '' %>>
+                    <label class="form-check-label" for="tagWork">work</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="tags" id="tagLifestyle" value="lifestyle" <%= currentTags.includes('lifestyle') ? 'checked' : '' %>>
+                    <label class="form-check-label" for="tagLifestyle">lifestyle</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="tags" id="tagMotor" value="motor" <%= currentTags.includes('motor') ? 'checked' : '' %>>
+                    <label class="form-check-label" for="tagMotor">motor</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="tags" id="tagMobile" value="mobile" <%= currentTags.includes('mobile') ? 'checked' : '' %>>
+                    <label class="form-check-label" for="tagMobile">mobile</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar Producto</button>
+
+        </form>
+
+        <% if (values._id) { %>
+             <hr>
+             <button id="deleteBtn" class="btn btn-danger">Eliminar Anuncio</button>
+        <% } %>
+
+    </div>
+</section>
+
+<% if (values._id) { %>
+    <script>
+        const btnElement = document.querySelector('#deleteBtn');
+        const productId = "<%= values._id %>";
+
+        btnElement.addEventListener('click', () => {
+            if(confirm('¿Seguro que quieres borrar este artículo de Nodepop?')) {
+                // Hacemos el fetch a la nueva ruta de productos
+                fetch("/products/" + productId, { method: "DELETE" })
+                    .then(response => response.json())
+                    .then(() => {
+                        // Redirigimos al catálogo principal
+                        window.location.href = '/';
+                    });
+            }
+        });
+    </script>
+<% } %>
+
+<%- include('partials/
