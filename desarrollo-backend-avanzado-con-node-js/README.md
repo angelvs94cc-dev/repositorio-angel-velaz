@@ -31,3 +31,10 @@ Los usuarios pueden registrarse, iniciar sesión, publicar libros, editar sus pu
 
 ```bash
 npm install
+```
+
+## Despliegue
+
+Backend: http://angelvs94cc-dev.duckdns.org/books
+
+Archivo estático servido por Nginx: http://angelvs94cc-dev.duckdns.org/public/info.txt
